@@ -7,24 +7,7 @@ import mmcv
 import numpy as np
 
 from mmdet.core import voc_classes
-
-COCO_CLASSES = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 
-         'boat', 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 
-         'bird', 'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear', 'zebra', 
-         'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee', 
-         'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 
-         'skateboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 
-         'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple', 'sandwich', 'orange', 
-         'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch', 
-         'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 
-         'remote', 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 
-         'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier', 
-         'toothbrush']
-
-PASCAL_VOC_CLASSES = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat', 'chair', 
-         'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person', 'pottedplant', 
-         'sheep', 'sofa', 'train', 'tvmonitor']
-
+from mmdet.core import coco_classes
     
 # Define the mapping from Pascal VOC to CoCo
 mapping = {
@@ -51,8 +34,8 @@ mapping = {
 }
 
 def get_mapped_id_by_name(name):
-    list1_indices = {item: idx for idx, item in enumerate(COCO_CLASSES)}
-    list2_indices = {item: idx for idx, item in enumerate(PASCAL_VOC_CLASSES)}
+    list1_indices = {item: idx for idx, item in enumerate(coco_classes())}
+    list2_indices = {item: idx for idx, item in enumerate(voc_classes())}
     if name in mapping:
         list2_id = list2_indices[name]
         list1_id = list1_indices[mapping[name]]
@@ -67,8 +50,7 @@ def get_mapped_name(name):
     else:
         return f"Error: '{name}' not found in coco classes"
     
-label_ids = {get_mapped_name(name): get_mapped_id_by_name(name) for name in enumerate(voc_classes())}
-
+label_ids = {get_mapped_name(name): get_mapped_id_by_name(name) for name in voc_classes()}
 
 def parse_xml(args):
     xml_path, img_path = args
@@ -199,7 +181,7 @@ def cvt_to_coco_json(annotations):
         coco['annotations'].append(annotation_item)
         return annotation_id + 1
 
-    for category_id, name in enumerate(voc_classes()):
+    for name in voc_classes():
         category_item = dict()
         category_item['supercategory'] = str('none')
         category_item['id'] = get_mapped_id_by_name(str(name))

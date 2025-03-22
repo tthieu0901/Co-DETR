@@ -8,9 +8,6 @@ import numpy as np
 
 from mmdet.core import voc_classes
 
-label_ids = {get_mapped_name(name): i for i, name in enumerate(voc_classes())}
-
-
 # Define the mapping from Pascal VOC to CoCo
 mapping = {
     'aeroplane': 'airplane',      # Synonym
@@ -40,6 +37,8 @@ def get_mapped_name(name):
         return mapping[name]
     else:
         return f"Error: '{name}' not found in coco classes"
+    
+label_ids = {get_mapped_name(name): i for i, name in enumerate(voc_classes())}
 
 
 def parse_xml(args):

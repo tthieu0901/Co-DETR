@@ -250,10 +250,7 @@ class CocoDataset(CustomDataset):
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
                     print("WHAT THE F*** IS GOING ON HERE??")
-                    print(label)
-                    print(self.cat_ids)
-                    print(self.cat_ids[label])
-                    data['category_id'] = self.CLASSES[label]
+                    data['category_id'] =  self.cat_ids[label] if label in self.cat_ids else -1
                     json_results.append(data)
         return json_results
 

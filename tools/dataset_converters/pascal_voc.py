@@ -35,7 +35,12 @@ mapping = {
 
 def get_mapped_id_by_name(name):
     coco_indices = {item: idx for idx, item in enumerate(coco_classes())}
-    return coco_indices[name]
+    if name in voc_classes():
+        return coco_indices[mapping[name]]
+    elif name in coco_classes():
+        return coco_indices[name]
+    else:
+        return f"Error: '{name}' not found in coco classes"
     
 def get_mapped_name(name):
     # Mapping logic
@@ -44,7 +49,7 @@ def get_mapped_name(name):
     else:
         return f"Error: '{name}' not found in coco classes"
     
-label_ids = {get_mapped_name(name): get_mapped_id_by_name(get_mapped_name(name)) for name in voc_classes()}
+label_ids = {get_mapped_name(name): get_mapped_id_by_name(name) for name in voc_classes()}
 
 def parse_xml(args):
     xml_path, img_path = args

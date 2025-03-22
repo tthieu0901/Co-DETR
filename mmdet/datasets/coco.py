@@ -253,7 +253,7 @@ class CocoDataset(CustomDataset):
                     print(label)
                     print(self.cat_ids)
                     print(self.cat_ids[label])
-                    data['category_id'] = self.cat_ids[label]
+                    data['category_id'] = self.CLASSES[label]
                     json_results.append(data)
         return json_results
 

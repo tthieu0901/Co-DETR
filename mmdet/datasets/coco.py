@@ -249,10 +249,6 @@ class CocoDataset(CustomDataset):
                     data['image_id'] = img_id
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
-                    print("WHAT THE F*** IS GOING ON HERE??")
-                    print(label)
-                    print(self.cat_ids)
-
                     data['category_id'] =  label
                     json_results.append(data)
         return json_results

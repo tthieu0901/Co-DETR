@@ -21,12 +21,12 @@ mapping = {
     'cat': 'cat',               # Exact match
     'chair': 'chair',             # Exact match
     'cow': 'cow',                 # Exact match
-    'diningtable': 'dining table',# Spelling variation
+    'diningtable': 'dining_table',# Spelling variation
     'dog': 'dog',                 # Exact match
     'horse': 'horse',             # Exact match
     'motorbike': 'motorcycle',    # Synonym
     'person': 'person',           # Exact match
-    'pottedplant': 'potted plant',# Spelling variation
+    'pottedplant': 'potted_plant',# Spelling variation
     'sheep': 'sheep',             # Exact match
     'sofa': 'couch',              # Synonym
     'train': 'train',             # Exact match

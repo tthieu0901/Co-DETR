@@ -139,12 +139,43 @@ def cvt_to_coco_json(annotations):
         annotation_item['id'] = int(annotation_id)
         coco['annotations'].append(annotation_item)
         return annotation_id + 1
+    
+    def get_mapped_name(name):
+        # Define the mapping from List 2 to List 1
+        mapping = {
+            'aeroplane': 'airplane',      # Synonym
+            'bicycle': 'bicycle',         # Exact match
+            'bird': 'bird',               # Exact match
+            'boat': 'boat',               # Exact match
+            'bottle': 'bottle',           # Exact match
+            'bus': 'bus',                 # Exact match
+            'car': 'car',                 # Exact match
+            'cat': 'cat',               # Exact match
+            'chair': 'chair',             # Exact match
+            'cow': 'cow',                 # Exact match
+            'diningtable': 'dining table',# Spelling variation
+            'dog': 'dog',                 # Exact match
+            'horse': 'horse',             # Exact match
+            'motorbike': 'motorcycle',    # Synonym
+            'person': 'person',           # Exact match
+            'pottedplant': 'potted plant',# Spelling variation
+            'sheep': 'sheep',             # Exact match
+            'sofa': 'couch',              # Synonym
+            'train': 'train',             # Exact match
+            'tvmonitor': 'tv'             # Approximate match (subset/variation)
+        }
+
+        # Mapping logic
+        if name in mapping:
+            return mapping[name]
+        else:
+            return f"Error: '{name}' not found in coco classes"
 
     for category_id, name in enumerate(voc_classes()):
         category_item = dict()
         category_item['supercategory'] = str('none')
         category_item['id'] = int(category_id)
-        category_item['name'] = str(name)
+        category_item['name'] = get_mapped_name(str(name))
         coco['categories'].append(category_item)
 
     for ann_dict in annotations:

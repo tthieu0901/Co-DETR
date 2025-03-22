@@ -35,13 +35,7 @@ mapping = {
 
 def get_mapped_id_by_name(name):
     coco_indices = {item: idx for idx, item in enumerate(coco_classes())}
-    # voc_indices = {item: idx for idx, item in enumerate(voc_classes())}
-    if name in voc_classes():
-        return coco_indices[mapping[name]]
-    elif name in coco_classes():
-        return coco_indices[name]
-    else:
-        return f"Error: '{name}' not found in coco classes"
+    return coco_indices[name]
     
 def get_mapped_name(name):
     # Mapping logic

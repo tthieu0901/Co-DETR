@@ -34,12 +34,11 @@ mapping = {
 }
 
 def get_mapped_id_by_name(name):
-    list1_indices = {item: idx for idx, item in enumerate(coco_classes())}
-    list2_indices = {item: idx for idx, item in enumerate(voc_classes())}
+    coco_indices = {item: idx for idx, item in enumerate(coco_classes())}
+    # voc_indices = {item: idx for idx, item in enumerate(voc_classes())}
     if name in mapping:
-        list2_id = list2_indices[name]
-        list1_id = list1_indices[mapping[name]]
-        return list2_id, list1_id
+        id = coco_indices[mapping[name]]
+        return id
     else:
         return None, None
     

@@ -44,7 +44,7 @@ def get_mapped_name(name):
     else:
         return f"Error: '{name}' not found in coco classes"
     
-label_ids = {get_mapped_name(name): get_mapped_id_by_name(name) for name in voc_classes()}
+label_ids = {get_mapped_name(name): get_mapped_id_by_name(get_mapped_name(name)) for name in voc_classes()}
 
 def parse_xml(args):
     xml_path, img_path = args

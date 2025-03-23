@@ -72,7 +72,7 @@
         {
             "supercategory": "none",
             "id": 0,
-            "name": "aeroplane"
+            "name": "airplane"
         },
         {
             "supercategory": "none",
@@ -122,7 +122,7 @@
         {
             "supercategory": "none",
             "id": 10,
-            "name": "diningtable"
+            "name": "dining table"
         },
         {
             "supercategory": "none",
@@ -137,7 +137,7 @@
         {
             "supercategory": "none",
             "id": 13,
-            "name": "motorbike"
+            "name": "motorcycle"
         },
         {
             "supercategory": "none",
@@ -147,7 +147,7 @@
         {
             "supercategory": "none",
             "id": 15,
-            "name": "pottedplant"
+            "name": "potted plant"
         },
         {
             "supercategory": "none",
@@ -157,7 +157,7 @@
         {
             "supercategory": "none",
             "id": 17,
-            "name": "sofa"
+            "name": "couch"
         },
         {
             "supercategory": "none",
@@ -167,7 +167,7 @@
         {
             "supercategory": "none",
             "id": 19,
-            "name": "tvmonitor"
+            "name": "tv"
         }
     ],
     "annotations": [

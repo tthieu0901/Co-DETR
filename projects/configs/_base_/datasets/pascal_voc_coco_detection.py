@@ -39,11 +39,11 @@ data = dict(
     val=dict(
         type=dataset_type,
         ann_file=data_root + 'VOC2007/annotations/voc07_test.json',
-        img_prefix=data_root,
+        img_prefix='',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         ann_file=data_root + 'VOC2007/annotations/voc07_test.json',
-        img_prefix=data_root,
+        img_prefix='',
         pipeline=test_pipeline))
 evaluation = dict(interval=1, metric='bbox')

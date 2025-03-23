@@ -64,7 +64,7 @@ def parse_xml(args):
     labels_ignore = []
     for obj in root.findall('object'):
         name = obj.find('name').text
-        label = label_ids[get_mapped_name(name)]
+        label = get_mapped_name(name)
         difficult = int(obj.find('difficult').text)
         bnd_box = obj.find('bndbox')
         bbox = [

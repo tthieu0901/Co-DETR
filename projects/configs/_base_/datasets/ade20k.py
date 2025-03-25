@@ -37,18 +37,18 @@ data = dict(
         dataset=dict(
             type=dataset_type,
             ann_file=data_root + 'train.json',
-            img_prefix=data_root + 'train/',
+            img_prefix=data_root + 'train/data/',
             pipeline=train_pipeline
         )
     ),
     val=dict(
         type=dataset_type,
         ann_file=data_root + 'val.json',
-        img_prefix=data_root + 'val/',
+        img_prefix=data_root + 'val/data/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         ann_file=data_root + 'val.json',
-        img_prefix=data_root + 'val/',
+        img_prefix=data_root + 'val/data/',
         pipeline=test_pipeline))
 evaluation = dict(interval=1, metric='bbox')

@@ -249,8 +249,11 @@ class CocoDataset(CustomDataset):
                     data['image_id'] = img_id
                     data['bbox'] = self.xyxy2xywh(bboxes[i])
                     data['score'] = float(bboxes[i][4])
-                    data['category_id'] = self.cat_ids[label]
-                    json_results.append(data)
+                    data['category_id'] = self.cat_ids[label] if label < len(self.cat_ids) else -1
+                    if data['category_id'] == -1:
+                        warnings.warn(f'category_id {label} not in self.cat_ids')
+                    else:
+                        json_results.append(data)
         return json_results
 
     def _segm2json(self, results):

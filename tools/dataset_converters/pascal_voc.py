@@ -7,9 +7,49 @@ import mmcv
 import numpy as np
 
 from mmdet.core import voc_classes
+from mmdet.core import coco_classes
+    
+# Define the mapping from Pascal VOC to CoCo
+mapping = {
+    'aeroplane': 'airplane',      # Synonym
+    'bicycle': 'bicycle',         # Exact match
+    'bird': 'bird',               # Exact match
+    'boat': 'boat',               # Exact match
+    'bottle': 'bottle',           # Exact match
+    'bus': 'bus',                 # Exact match
+    'car': 'car',                 # Exact match
+    'cat': 'cat',               # Exact match
+    'chair': 'chair',             # Exact match
+    'cow': 'cow',                 # Exact match
+    'diningtable': 'dining_table',# Spelling variation
+    'dog': 'dog',                 # Exact match
+    'horse': 'horse',             # Exact match
+    'motorbike': 'motorcycle',    # Synonym
+    'person': 'person',           # Exact match
+    'pottedplant': 'potted_plant',# Spelling variation
+    'sheep': 'sheep',             # Exact match
+    'sofa': 'couch',              # Synonym
+    'train': 'train',             # Exact match
+    'tvmonitor': 'tv'             # Approximate match (subset/variation)
+}
 
-label_ids = {name: i for i, name in enumerate(voc_classes())}
-
+def get_mapped_id_by_name(name):
+    coco_indices = {item: idx for idx, item in enumerate(coco_classes())}
+    if name in voc_classes():
+        return coco_indices[mapping[name]]
+    elif name in coco_classes():
+        return coco_indices[name]
+    else:
+        return f"Error: '{name}' not found in coco classes"
+    
+def get_mapped_name(name):
+    # Mapping logic
+    if name in mapping:
+        return mapping[name]
+    else:
+        return f"Error: '{name}' not found in coco classes"
+    
+label_ids = {get_mapped_name(name): get_mapped_id_by_name(name) for name in voc_classes()}
 
 def parse_xml(args):
     xml_path, img_path = args
@@ -24,7 +64,7 @@ def parse_xml(args):
     labels_ignore = []
     for obj in root.findall('object'):
         name = obj.find('name').text
-        label = label_ids[name]
+        label = get_mapped_id_by_name(name)
         difficult = int(obj.find('difficult').text)
         bnd_box = obj.find('bndbox')
         bbox = [
@@ -140,11 +180,11 @@ def cvt_to_coco_json(annotations):
         coco['annotations'].append(annotation_item)
         return annotation_id + 1
 
-    for category_id, name in enumerate(voc_classes()):
+    for name in voc_classes():
         category_item = dict()
         category_item['supercategory'] = str('none')
-        category_item['id'] = int(category_id)
-        category_item['name'] = str(name)
+        category_item['id'] = get_mapped_id_by_name(str(name))
+        category_item['name'] = get_mapped_name(str(name))
         coco['categories'].append(category_item)
 
     for ann_dict in annotations:

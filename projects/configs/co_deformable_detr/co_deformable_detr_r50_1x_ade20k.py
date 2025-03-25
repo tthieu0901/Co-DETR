@@ -309,6 +309,8 @@ optimizer = dict(
             'reference_points': dict(lr_mult=0.1)
         }))
 optimizer_config = dict(grad_clip=dict(max_norm=0.1, norm_type=2))
+load_from = 'checkpoint/co_deformable_detr_r50_1x_coco.pth'  # noqa
+
 # learning policy
 lr_config = dict(policy='step', step=[11])
 runner = dict(type='EpochBasedRunner', max_epochs=12)
